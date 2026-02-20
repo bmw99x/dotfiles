@@ -1,0 +1,13 @@
+[user]
+	email = ben.whatling@mckenzieintelligence.com
+	name = Ben Whatling
+[credential "https://github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[url "git@gitlab.com:"]
+	insteadOf = https://gitlab.com/
+[init]
+	defaultBranch = main

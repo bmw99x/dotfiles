@@ -7,7 +7,7 @@ return {
     },
     config = function()
       vim.g.opencode_opts = {
-        cmd = "/Users/benw/.opencode/bin/opencode",
+        cmd = "{{ .chezmoi.homeDir }}/.opencode/bin/opencode",
       }
       vim.o.autoread = true
     end,

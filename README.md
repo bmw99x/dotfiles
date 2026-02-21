@@ -1,38 +1,41 @@
 # Dotfiles
 
-Personal configuration files for development environment.
+Personal configuration files managed with [chezmoi](https://www.chezmoi.io/).
 
 ## Contents
 
-- `.config/nvim2/` - Neovim configuration (Lua-based)
+- `.config/nvim/` - Neovim configuration (Lua-based, lazy.nvim)
 - `.gitconfig` - Git configuration
 
-## Neovim Setup
+## Setup on a new machine
+
+```bash
+# Install chezmoi and apply dotfiles in one step
+sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply git@github.com:bmw99x/dotfiles.git
+```
+
+Or manually:
+
+```bash
+brew install chezmoi
+chezmoi init git@github.com:bmw99x/dotfiles.git
+chezmoi apply
+```
+
+## Neovim
 
 Requirements:
 - Neovim 0.11+
 - Git
 - A Nerd Font (for icons)
+- `uv` (for Python tooling via uv.nvim)
 
-### Install
-
-```bash
-# Clone this repo
-git clone https://github.com/bmw99x/dotfiles.git
-
-# Symlink nvim config
-ln -s $(pwd)/dotfiles/.config/nvim2 ~/.config/nvim2
-
-# Install plugins (auto-installs on first launch)
-nvim
-```
-
-### LSP Setup
+### LSP
 
 Python:
-- `basedpyright` - imports/auto-import
+- `basedpyright` - imports/completions (no diagnostics)
 - `ruff` - linting + formatting (auto-format on save)
-- `ty` - type checking
+- `ty` - type checking only
 
 TypeScript/JavaScript:
 - `vtsls` - completions, go-to-def, hover
@@ -48,19 +51,29 @@ CSS:
 - **nvim-cmp** - Autocompletion with LSP
 - **nvim-treesitter** - Syntax highlighting
 - **trouble.nvim** - Diagnostics list
-- **glance.nvim** - LSP preview
+- **glance.nvim** - LSP peek (definitions, references)
 - **nvim-dap** - Debugging (Python via debugpy)
 - **themery.nvim** - Theme switcher
 - **which-key.nvim** - Keybinding help
 
 ### Keymaps
 
-See which-key by pressing `<leader>` (space).
+Press `<leader>` (space) to see all keymaps via which-key.
 
 Common:
 - `<leader>ff` - Find files
 - `<leader>sg` - Grep
 - `<leader>gg` - Lazygit
-- `gd` - Glance definitions
-- `<leader>dd` - Diagnostics
+- `gD` - Glance definitions
+- `<leader>dd` - Diagnostics (Trouble)
 - `<leader>db` - Debug breakpoint
+
+## chezmoi source layout
+
+chezmoi uses a `dot_` prefix convention in this repo:
+
+| Repo path | Destination |
+|---|---|
+| `dot_config/nvim/` | `~/.config/nvim/` |
+| `dot_gitconfig` | `~/.gitconfig` |
+| `dot_config/nvim/lua/plugins/ai.lua.tmpl` | `~/.config/nvim/lua/plugins/ai.lua` (templated) |

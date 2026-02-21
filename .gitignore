@@ -1,5 +1,5 @@
-.config/nvim2/lazy-lock.json
-.config/nvim2/.DS_Store
+dot_config/nvim2/lazy-lock.json
+dot_config/nvim2/.DS_Store
 .DS_Store
 *.pyc
 __pycache__/

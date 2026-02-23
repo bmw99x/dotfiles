@@ -3,7 +3,9 @@ return {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
-    config = function()
+    config = function(plugin)
+      -- v1 moved queries into runtime/ subdir; add it to rtp so Neovim finds them
+      vim.opt.runtimepath:append(plugin.dir .. "/runtime")
       require("nvim-treesitter").setup({
         ensure_installed = {
           "lua", "vim", "vimdoc", "markdown", "python",
